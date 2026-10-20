@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Print Spooler | Queue Data Structure Demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>Print Spooler</h1>
+    <p>A shared lab printer prints one job at a time. Jobs wait in a queue and print in the order they arrive (first in, first out).</p>
+  </header>
+
+  <div class="layout">
+    <section class="box side" aria-labelledby="addh">
+      <h2 id="addh">Submit a job</h2>
+      <label for="user">Student name</label>
+      <input id="user" placeholder="Ama" autocomplete="off">
+      <label for="doc">Document</label>
+      <input id="doc" placeholder="Assignment.docx" autocomplete="off">
+      <label for="pages">Pages</label>
+      <input id="pages" type="number" min="1" max="30" value="4">
+      <p class="err" id="err" role="alert"></p>
+      <button class="btn primary full" id="add">Enqueue job</button>
+
+      <h2 class="sub">Controls</h2>
+      <div class="btns">
+        <button class="btn" id="next">Dequeue &amp; print</button>
+        <button class="btn" id="all">Print all</button>
+        <button class="btn" id="peek">Peek</button>
+        <button class="btn" id="clear">Clear</button>
+      </div>
+      <label for="speed">Printer speed</label>
+      <select id="speed">
+        <option value="900">Slow</option>
+        <option value="450" selected>Normal</option>
+        <option value="180">Fast</option>
+      </select>
+      <button class="btn full" id="sample">Load sample jobs</button>
+    </section>
+
+    <div class="main">
+      <section class="stats" aria-label="Queue statistics">
+        <div class="stat"><b id="sWait">0</b><span>Waiting</span></div>
+        <div class="stat"><b id="sDone">0</b><span>Jobs printed</span></div>
+        <div class="stat"><b id="sPages">0</b><span>Pages printed</span></div>
+        <div class="stat"><b id="sNext">none</b><span>Next in line</span></div>
+      </section>
+
+      <section class="box" aria-labelledby="qh">
+        <h2 id="qh">Queue and printer</h2>
+        <div class="pipeline">
+          <div class="trackwrap">
+            <div class="ends"><span>REAR (enqueue here)</span><span>FRONT (dequeue here)</span></div>
+            <div class="track" id="track" aria-live="polite"></div>
+          </div>
+          <div class="printer" id="printer">
+            <div class="top"><i class="led" id="led"></i><span id="pState">Idle</span></div>
+            <div class="slot"><div class="paper" id="paper"></div></div>
+            <div class="bar"><i id="bar"></i></div>
+            <small id="pInfo">Waiting for a job</small>
+          </div>
+        </div>
+      </section>
+
+      <div class="two">
+        <section class="box" aria-labelledby="dh">
+          <h2 id="dh">Completed</h2>
+          <ul class="done" id="done"><li class="none">Nothing printed yet.</li></ul>
+        </section>
+        <section class="box" aria-labelledby="lh">
+          <h2 id="lh">Operation log</h2>
+          <ul class="log" id="log"><li class="none">Operations appear here.</li></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="queue.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
